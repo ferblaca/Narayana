@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: demoBatchNarayana
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    xa:
+      data-source-class-name: org.h2.jdbcx.JdbcDataSource
+    initialization-mode: always
+  h2:
+    console:
+      enabled: true
+narayana:
+  recoveryDb:
+    datasource:
+      url: jdbc:h2:mem:recovery;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      driver-class-name: org.h2.Driver
+      username: sa
+      password:
+  #  recovery:
+  #    store: com.arjuna.ats.internal.arjuna.objectstore.VolatileStore
+  transaction-manager-id: ${random.long}
+  log-dir: ${java.io.tmpdir}/logs/${narayana.transaction-manager-id}
+  #Timeout un seconds. Default to 5m
+  default-timeout: 300
+
+recovery:
+  period:
+    start:
+      disabled: false
