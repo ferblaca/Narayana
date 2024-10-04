@@ -25,8 +25,10 @@ public class DemoBatchNarayanaApplication {
         return new ApplicationRunner() {
             @Override
             public void run(ApplicationArguments args) throws Exception {
-                Product product = productService.createProduct(new Product("product", 10.0D, 20));
-                LOG.info("product persisted id {}", product.getId());
+                for (int i = 0; i < 10; i++) {
+                    Product product = productService.createProduct(new Product("product" + i, 10.0D, 20));
+                    LOG.info("product persisted id {}", product.getId());
+                }
                 readDaemonThreads();
             }
         };
